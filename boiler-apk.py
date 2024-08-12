@@ -167,9 +167,9 @@ def plot_power(data):
     gas_boiler_zeros = data[data['Gas-boiler_Power'] == 0].index
 
     # plotting only the zeros and the peaks of both e-boiler and gas-boiler
-    ax.plot(data.index[e_boiler_peaks], data['E-boiler_Power'].iloc[e_boiler_peaks], 'bo-', label='E-boiler Peaks', markersize=6)
+    ax.plot(data.index[e_boiler_peaks], data['E-boiler_Power'].iloc[e_boiler_peaks], 'bo^-', label='E-boiler Peaks', markersize=6)
     ax.plot(e_boiler_zeros, data['E-boiler_Power'].loc[e_boiler_zeros], 'b^', label='E-boiler Zeros', markersize=6)
-    ax.plot(data.index[gas_boiler_peaks], data['Gas-boiler_Power'].iloc[gas_boiler_peaks], 'ro-', label='Gas-boiler Peaks', markersize=6)
+    ax.plot(data.index[gas_boiler_peaks], data['Gas-boiler_Power'].iloc[gas_boiler_peaks], 'ro^-', label='Gas-boiler Peaks', markersize=6)
     ax.plot(gas_boiler_zeros, data['Gas-boiler_Power'].loc[gas_boiler_zeros], 'r^', label='Gas-boiler Zeros', markersize=6)
 
     ax.set_title('Boiler Power Delivery - Peaks and Zeros')
