@@ -90,7 +90,7 @@ def calculate_savings(data, gas_price, desired_power):
     
     # calculating the costs per boiler
     e_boiler_cost = total_e_boiler_power_mwh * data[data['Efficient_Boiler'] == 'E-boiler']['Combined_Price_EUR_per_MWh'].mean()
-    gas_boiler_cost = total_gas_boiler_power_mwh * gas_price_per_kwh * 1000 
+    gas_boiler_cost = total_gas_boiler_power_mwh * (gas_price_per_kwh / 1000)
     
     # caclculating the total costs and the saving costs and the saving precentage
     total_cost = gas_boiler_cost - abs(e_boiler_cost)
