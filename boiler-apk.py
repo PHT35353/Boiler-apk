@@ -96,7 +96,7 @@ def calculate_savings(data, gas_price, desired_power):
     total_cost = gas_boiler_cost - abs(e_boiler_cost)
     total_cost = abs(total_cost)
     total_savings= abs(e_boiler_cost)
-    percentage_savings = (total_cost / gas_boiler_cost) * 100 if gas_boiler_cost else 0
+    percentage_savings = (total_savings / gas_boiler_cost) * 100 if gas_boiler_cost else 0
     
     return total_savings, percentage_savings, e_boiler_cost, gas_boiler_cost, total_cost
 
