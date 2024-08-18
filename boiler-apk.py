@@ -13,9 +13,9 @@ st.title('Boiler Efficiency and Power Analysis Tool')
 st.markdown("""How it works?
 
 This tool allows you to compare the efficiency and costs between E-boilers and Gas-boilers based on day-ahead and imbalance electricity prices.
-You can select the date range, country, gas price, and desired power that you wish to get out of these boilers to analyze the costs and determine which boiler is more cost-effective.
-The results are displayed in interactive plots, and a summary of the key findings is provided.
-""")
+You can select the date range in start date and end date section, the country in country code section, the gas price in gas price EUR/kwh section and your desired power that you wish to get out of these boilers in the desired power section to analyze the costs and determine which boiler is more cost-effective.
+The results are displayed in interactive plots, and a summary of the key findings is provided. When the tool is running you can see a logo on top right next to stop that indicates that the program is running.
+If you wish to stop the program from running then you can click the stop button at the top right. It is also noted that the longer the selected time periode is the more time it takes to run the program. If you wish to change the theme or enter wide mode then click on the three dots at top right and click on settings.""")
 
 # this function gets the day-ahead prices from entsoe
 def get_day_ahead_data(start, end, country_code):
@@ -274,7 +274,7 @@ def main():
             # displays the results in a better looking way
             st.write('### Day-Ahead Data Results:')
             with st.container():
-                col1, col2, col3, col4, col5 = st.columns([3, 3, 3, 3, 3])
+                col1, col2, col3, col4, col5 = st.columns([4, 4, 4, 4, 4])
                 col1.write(f"**Total Savings:**\n{total_savings_day_ahead:,.2f} EUR")
                 col2.write(f"**Percentage Savings:**\n{percentage_savings_day_ahead:.2f}%")
                 col3.write(f"**Total Cost:**\n{total_cost_day_ahead:,.2f} EUR")
@@ -283,7 +283,7 @@ def main():
 
             st.write('### Imbalance Data Results:')
             with st.container():
-                col6, col7, col8, col9, col10 = st.columns([3, 3, 3, 3, 3])
+                col6, col7, col8, col9, col10 = st.columns([4, 4, 4, 4, 4])
                 col6.write(f"**Total Savings:**\n{total_savings_imbalance:,.2f} EUR")
                 col7.write(f"**Percentage Savings:**\n{percentage_savings_imbalance:.2f}%")
                 col8.write(f"**Total Cost:**\n{total_cost_imbalance:,.2f} EUR")
