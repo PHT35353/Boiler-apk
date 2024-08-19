@@ -137,7 +137,7 @@ def calculate_savings_imbalance(data, gas_price, desired_power):
                                                    if row['Efficient_Boiler_Imbalance'] == 'Gas-boiler' else (0), axis=1)
     
     # this then adds the former mentioned gas_price in Euro column up to get the total gas price
-    gas_boiler_cost = data['Gas_Boiler_Cost_Imbalance_in_Euro'].sum()
+    gas_boiler_cost = data['Gas_Boiler_Cost_Imbalance_in_Euro'].sum()/4
     
     # calculate the e-boiler cost similarly as in the day-ahead function
     data['E_Boiler_Cost_Imbalance_in_Euro'] = data.apply(lambda row: desired_power_Mwh * (row['Imbalance_Price_EUR_per_MWh']) 
