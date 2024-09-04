@@ -428,10 +428,10 @@ def main():
             st.error("No imbalance data available")
             return
 
-        # checks if its the default or the uploaded data
+        # initializes a flag to check if we are using uploaded data or default input
         use_uploaded_data = False
 
-        # process uploaded file if available
+        # processes uploaded file if available
         if uploaded_file is not None:
             try:
                 uploaded_data = pd.read_excel(uploaded_file)
@@ -460,13 +460,13 @@ def main():
                     # sets the flag to true indicating we are using uploaded data
                     use_uploaded_data = True
                 else:
-                    st.error("Uploaded file must contain Start tim' and thermal load (kW) columns")
+                    st.error("Uploaded file must contain 'Start time' and 'thermal load (kW)' columns")
                     return
             except Exception as e:
                 st.error(f"Error reading the uploaded file: {str(e)}")
                 return
         else:
-            # if no file uploaded, use the desired power input
+            # if no file uploaded use the desired power input
             day_ahead_data['Desired Power'] = desired_power
             imbalance_data['Desired Power'] = desired_power
 
@@ -520,7 +520,7 @@ def main():
             col6.write(f"**Gas-boiler Cost (when only used):**\n{only_gas_boiler_cost_day_ahead:,.2f} EUR")
 
         st.write('### Day-Ahead Data Table:')
-        st.dataframe(day_ahead_data.drop(columns=['E-boiler_Price_EUR_per_KWh', 'Gas-boiler_Price_EUR per_KWh'], errors='ignore'))
+        st.dataframe(day_ahead_data.drop(columns=['E-boiler_Price_EUR_per_KWh', 'Gas-boiler_Price_EUR_per_KWh'], errors='ignore'))
 
         st.write('### Day-Ahead Market Price Comparison:')
         fig_day_ahead_price, _ = plot_price(day_ahead_data, imbalance_data_display, gas_price)
@@ -541,9 +541,9 @@ def main():
             col11.write(f"**Gas-boiler Cost (when the efficient choice):**\n{gas_boiler_cost_imbalance:,.2f} EUR")
             col12.write(f"**Gas-boiler Cost (when only used):**\n{only_gas_boiler_cost_imbalance:,.2f} EUR")
 
-        # drops the eur/kwh columns
+        # explicitly drops the columns just before displaying the Imbalance data
         imbalance_data_display = imbalance_data_display.drop(columns=['E_Boiler_Price_EUR_per_KWh', 'Gas_Boiler_Price_EUR_per_KWh'], errors='ignore')
-        
+
         st.write('### Imbalance Data Table:')
         st.dataframe(imbalance_data_display)
 
@@ -554,6 +554,10 @@ def main():
         st.write('### Imbalance Market Power Usage:')
         _, fig_imbalance_power = plot_power(day_ahead_data, imbalance_data_display)
         st.plotly_chart(fig_imbalance_power)
+
+        # displays the comparison of profitability between Day-Ahead and Imbalance markets
+        st.write('### Comparison of Profitability between Day-Ahead and Imbalance Markets:')
+        st.dataframe(combined_data)
 
         # displays total profits, profit percentages, and the most profitable market
         st.write(f"### Most Profitable Market Overall: {most_profitable_market}")
